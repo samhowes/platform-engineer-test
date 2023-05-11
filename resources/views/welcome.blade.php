@@ -2,11 +2,32 @@
 
 @section('title', 'Find Movies')
 
+@section('scripts')
+<script>
+    let set = false
+    // kindof hacky for simplicity: get the user's timezone so the server can render datetimes in
+    // the user's local timezone
+    document.onreadystatechange = (e) => {
+        if (set) return
+        const f = document.getElementById('queryForm');
+        console.log(f)
+        const tz = document.createElement('input')
+        tz.setAttribute('type', 'hidden')
+        tz.setAttribute('name', 'tz')
+        tz.setAttribute('value', Intl.DateTimeFormat().resolvedOptions().timeZone)
+        console.log(tz)
+        f.appendChild(tz)
+        set = true
+    }
+
+</script>
+@endsection
+
 @section('content')
     <div class="step">
         Find movies/shows made in ABQ
     </div>
-    <form method="POST" action="/show">
+    <form id="queryForm" method="POST" action="/show">
         @csrf
         <div class="input-group">
             <label for="start_date">Start Date</label>

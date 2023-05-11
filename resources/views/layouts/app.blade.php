@@ -68,6 +68,8 @@
                 color: #FFFFFF;
             }
         </style>
+        @yield('styles')
+        @yield('scripts')
     </head>
     <body>
     <div class="flex-center full-height">
